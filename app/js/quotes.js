@@ -3,7 +3,7 @@
 (function() {
 	'use strict';
 
-	const requestUrl = 'https://quote-garden.herokuapp.com/api/v2/quotes/random';
+	const url = 'https://quote-garden.herokuapp.com/api/v2/quotes/random';
 
 	function HtmlEncode(s) {
 		var HTMLCharMap = {
@@ -26,7 +26,7 @@
 
 	$.ajax({
 		type: 'GET',
-		url: requestUrl,
+		url: url,
 		success: function(response) {
 			console.log(HtmlEncode(response.quote.quoteText));
 		},

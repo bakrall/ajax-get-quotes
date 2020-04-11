@@ -62,5 +62,3 @@ exports.default = parallel(
 		watchTask
 	)
 )
-
-// exports.serve = runServer;
