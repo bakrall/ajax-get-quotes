@@ -1,0 +1,1 @@
+!function(){"use strict";$.ajax({type:"GET",url:"https://quote-garden.herokuapp.com/api/v2/quotes/random",success:function(o){var t,e;console.log((t=o.quote.quoteText,e={"&":"&amp;","'":"&#39;",'"':"&quot;","<":"&lt;",">":"&gt;","\\":"&#x5c;","`":"&#x60;",":":"&#58;"},t.replace(/[&'''<>\\`:]/g,(function(o){return e[o]}))))},error:function(o){console.log(o)}})}();

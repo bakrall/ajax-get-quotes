@@ -1,0 +1,32 @@
+{
+  "name": "ajax-get-quotes",
+  "version": "1.0.0",
+  "description": "Get quotes from RESTful API \u0016\u0016//https://pprathameshmore.github.io/QuoteGarden/",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-connect": "^5.7.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.7.6",
+    "cssnano": "^4.1.10",
+    "gulp-postcss": "^8.0.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify-es": "^2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bakrall/ajax-get-quotes.git"
+  },
+  "author": "Barbara Stadnik",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bakrall/ajax-get-quotes/issues"
+  },
+  "homepage": "https://github.com/bakrall/ajax-get-quotes#readme"
+}
