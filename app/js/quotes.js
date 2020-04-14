@@ -3,7 +3,9 @@
 (function() {
 	'use strict';
 
-	const url = 'https://quote-garden.herokuapp.com/api/v2/quotes/random';
+	const url = 'https://quote-garden.herokuapp.com/api/v2/quotes/random',
+		$quote = $('.quote'),
+		$quoteAuthor = $('.quote-author');
 
 	function HtmlEncode(s) {
 		var HTMLCharMap = {
@@ -28,10 +30,15 @@
 		type: 'GET',
 		url: url,
 		success: function(response) {
-			console.log(HtmlEncode(response.quote.quoteText));
+			displayQuote(response);
 		},
 		error: function(error) {
 			console.log(error);
 		}
 	});
+
+	function displayQuote(response) {
+		$quote.text(response.quote.quoteText);
+		$quoteAuthor.text(response.quote.quoteAuthor);
+	}
 })();
