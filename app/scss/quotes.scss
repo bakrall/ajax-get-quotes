@@ -1,3 +1,26 @@
 body {
-	background: blue;
+	display: flex;
+	height: 100vh;
+	margin: 0;
+}
+
+.quote-container {
+	background: red;
+	width: 50%;
+}
+
+.image-container {
+	background-image: url("../app/images/annie-spratt-unsplash.jpg");
+	background-size: cover;
+	background-position: bottom left 30%;
+	width: 50%;
+}
+
+.visuallyhidden { 
+    position: absolute !important;
+    height: 1px; 
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
 }
