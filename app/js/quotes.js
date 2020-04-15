@@ -47,11 +47,32 @@
 		const request = getQuote();
 
 		request.done(() => {
-			$quote.text(quoteText);
-			$quoteAuthor.text(quoteAuthor);
+			populateText(quoteText, quoteAuthor);
+			storeQuote();
 		})
 	}
 
-	displayQuote();
+	function populateText(text = '', author = '') {
+		$quote.text(text);
+		$quoteAuthor.text(author);
+	}
+
+	function storeQuote() {
+		localStorage.setItem('quoteStored', quoteText);
+		localStorage.setItem('quoteAuthorStored', quoteAuthor);
+	}
+
+	function displayStoredQuote() {
+		const quoteStored = localStorage.getItem('quoteStored'),
+			quoteAuthorStored = localStorage.getItem('quoteAuthorStored');
+
+		if (quoteStored !== 'undefined' && quoteAuthorStored !== 'undefined') {
+			populateText(quoteStored, quoteAuthorStored);
+		} else {
+			displayQuote();
+		}
+	}
+ 
+	displayStoredQuote();
 	$getQuoteButton.on('click', displayQuote);
 })();
