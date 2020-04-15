@@ -1,5 +1,6 @@
 body {
 	margin: 0;
+	font-family: 'Courgette', cursive;
 }
 
 main {
@@ -25,13 +26,20 @@ main {
 	.quote-container {
 		width: 80%;
 		margin: 0 auto;
-		font-family: 'Courgette', cursive;
 		font-size: 1.5rem;
 	}
 
 	.get-quote-button {
 		align-self: flex-end;
 		margin: 20px 20% 0;
+		height: 40px;
+		border: 2px solid #000;
+		border-radius: 45%;
+		font-family: 'Courgette', cursive;
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 }
 

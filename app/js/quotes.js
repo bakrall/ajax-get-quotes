@@ -13,7 +13,7 @@
 	function htmlEncode(s) {
 		var HTMLCharMap = {
 			"&" : "&amp;",
-			"'" : "&#39;",
+			"'" : "&#39;", //it may appear in quote, for example "you'll", "you're"
 			'"' : "&quot;",
 			"<" : "&lt;",
 			">" : "&gt;",
@@ -64,9 +64,11 @@
 
 	function displayStoredQuote() {
 		const quoteStored = localStorage.getItem('quoteStored'),
-			quoteAuthorStored = localStorage.getItem('quoteAuthorStored');
+			quoteAuthorStored = localStorage.getItem('quoteAuthorStored'),
+			notUndefined = quoteStored !== 'undefined' && quoteAuthorStored !== 'undefined',
+			notNull = quoteStored !== null && quoteAuthorStored !== null;
 
-		if (quoteStored !== 'undefined' && quoteAuthorStored !== 'undefined') {
+		if (notUndefined && notNull) {
 			populateText(quoteStored, quoteAuthorStored);
 		} else {
 			displayQuote();
