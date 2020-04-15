@@ -5,9 +5,12 @@
 
 	const url = 'https://quote-garden.herokuapp.com/api/v2/quotes/random',
 		$quote = $('.quote'),
-		$quoteAuthor = $('.quote-author');
+		$quoteAuthor = $('.quote-author'),
+		$getQuoteButton = $('.get-quote-button');
 
-	function HtmlEncode(s) {
+	let quoteText, quoteAuthor;
+
+	function htmlEncode(s) {
 		var HTMLCharMap = {
 			"&" : "&amp;",
 			"'" : "&#39;",
@@ -26,19 +29,29 @@
 		return s.replace(/[&'''<>\\`:]/g, encodeHTMLmapper);
 	}
 
-	$.ajax({
-		type: 'GET',
-		url: url,
-		success: function(response) {
-			displayQuote(response);
-		},
-		error: function(error) {
-			console.log(error);
-		}
-	});
-
-	function displayQuote(response) {
-		$quote.text(response.quote.quoteText);
-		$quoteAuthor.text(response.quote.quoteAuthor);
+	function getQuote() {
+		return $.ajax({
+					type: 'GET',
+					url: url,
+					success: function(response) {
+						quoteText = htmlEncode(response.quote.quoteText),
+						quoteAuthor = htmlEncode(response.quote.quoteAuthor);
+					},
+					error: function(error) {
+						console.log(error);
+					}
+				});
 	}
+
+	function displayQuote() {
+		const request = getQuote();
+
+		request.done(() => {
+			$quote.text(quoteText);
+			$quoteAuthor.text(quoteAuthor);
+		})
+	}
+
+	displayQuote();
+	$getQuoteButton.on('click', displayQuote);
 })();
