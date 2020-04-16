@@ -1,53 +1,55 @@
 body {
 	margin: 0;
 	font-family: 'Courgette', cursive;
+	position: relative;
+	overflow: hidden;
 }
 
 main {
 	display: flex;
 	height: 100vh;
 	margin: 0;
-}
 
-.text-container {
-	// background: #5f1314;
-	// background: #315d60;
-	// background: #9d9391; //piękne
-	// background: #d1281f;
-	// background: #024048; //b.ładne
-	// background: #9e3b3e;
-	// background: #476836; //piękne
-	background: #df0017; //z potencjałem
-	width: 50%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+	.text-container {
+		// background: #5f1314;
+		// background: #315d60;
+		// background: #9d9391; //piękne
+		// background: #d1281f;
+		// background: #024048; //b.ładne
+		// background: #9e3b3e;
+		// background: #476836; //piękne
+		background: #df0017; //z potencjałem
+		width: 50%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 
-	.quote-container {
-		width: 80%;
-		margin: 0 auto;
-		font-size: 1.5rem;
-	}
+		.quote-container {
+			width: 80%;
+			margin: 0 auto;
+			font-size: 1.5rem;
+		}
 
-	.get-quote-button {
-		align-self: flex-end;
-		margin: 20px 20% 0;
-		height: 40px;
-		border: 2px solid #000;
-		border-radius: 45%;
-		font-family: 'Courgette', cursive;
+		.get-quote-button {
+			align-self: flex-end;
+			margin: 20px 20% 0;
+			height: 40px;
+			border: 2px solid #000;
+			border-radius: 45%;
+			font-family: 'Courgette', cursive;
 
-		&:hover {
-			cursor: pointer;
+			&:hover {
+				cursor: pointer;
+			}
 		}
 	}
-}
 
-.image-container {
-	background-image: url("../app/images/annie-spratt-unsplash.jpg");
-	background-size: cover;
-	background-position: bottom left 30%;
-	width: 50%;
+	.image-container {
+		background-image: url("../app/images/annie-spratt-unsplash.jpg");
+		background-size: cover;
+		background-position: bottom left 30%;
+		width: 50%;
+	}
 }
 
 .visuallyhidden { 
@@ -57,4 +59,42 @@ main {
     overflow: hidden;
     clip: rect(1px, 1px, 1px, 1px);
     white-space: nowrap;
+}
+
+.decoration-top,
+.decoration-bottom {
+	&::before,
+	&::after {
+		content: '';
+		display: block;
+		width: 100px;
+		height: 100px;
+		background: #000;
+		border-radius: 50%;
+		position: absolute;
+	}
+
+	&::before {
+		transform: translate(-50%, -50%);
+	}
+
+	&::after {
+		right: 0;
+		transform: translate(50%, -50%);
+	}
+}
+
+.decoration-bottom {
+	&::before,
+	&::after {
+		bottom: 0;
+	}
+
+	&::before {
+		transform: translate(-50%, 50%);
+	}
+
+	&::after {
+		transform: translate(50%, 50%);
+	}
 }
