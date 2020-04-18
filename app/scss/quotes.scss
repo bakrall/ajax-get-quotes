@@ -3,6 +3,15 @@ body {
 	font-family: 'Courgette', cursive;
 }
 
+.visuallyhidden { 
+    position: absolute !important;
+    height: 1px; 
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
+
 main {
 	display: flex;
 	height: 100vh;
@@ -45,35 +54,24 @@ main {
 	}
 }
 
-.visuallyhidden { 
-    position: absolute !important;
-    height: 1px; 
-    width: 1px;
-    overflow: hidden;
-    clip: rect(1px, 1px, 1px, 1px);
-    white-space: nowrap;
-}
-
-.decoration-top-left,
-.decoration-top-right,
-.decoration-bottom-left,
-.decoration-bottom-right {
+@mixin decoration($property, $value: 0) {
+	#{$property}: $value;
 	position: absolute;
 }
 
 .decoration-top-right,
 .decoration-bottom-right {
-	right: 0;
+	@include decoration(right);
 }
 
 .decoration-top-left,
 .decoration-top-right {
-	top: 0;
+	@include decoration(top);
 }
 
 .decoration-bottom-left,
 .decoration-bottom-right {
-	bottom: 0;
+	@include decoration(bottom);
 }
 
 @mixin circle($size, $background, $radius: 50%) {
@@ -89,7 +87,7 @@ main {
 
 .circle-small {
 	@include circle(25px, transparent);
-	
+
 	border: 2px solid #000;
 	border-radius: 50%;
 	position: absolute;
