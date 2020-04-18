@@ -9,14 +9,7 @@ main {
 	margin: 0;
 
 	.text-container {
-		// background: #5f1314;
-		// background: #315d60;
-		// background: #9d9391; //piękne
-		// background: #d1281f;
-		// background: #024048; //b.ładne
-		// background: #9e3b3e;
-		// background: #476836; //piękne
-		background: #df0017; //z potencjałem
+		background: #df0017;
 		width: 50%;
 		display: flex;
 		flex-direction: column;
@@ -61,172 +54,115 @@ main {
     white-space: nowrap;
 }
 
-.decoration-top-left-wrapper,
-.decoration-top-right-wrapper,
-.decoration-bottom-left-wrapper,
-.decoration-bottom-right-wrapper {
-	position: absolute;
-}
-
-.decoration-top-right-wrapper,
-.decoration-bottom-right-wrapper {
-	right: 0;
-}
-
-.decoration-top-left-wrapper,
-.decoration-top-right-wrapper {
-	top: 0;
-}
-
-.decoration-bottom-left-wrapper,
-.decoration-bottom-right-wrapper {
-	bottom: 0;
-}
-
 .decoration-top-left,
 .decoration-top-right,
 .decoration-bottom-left,
 .decoration-bottom-right {
-	width: 100px;
-	height: 100px;
-	background: rgba(0,0,0,0.8);
-	border-radius: 50%;
+	position: absolute;
 }
 
-.small-circle {
-	width: 25px;
-	height: 25px;
-	background: transparent;
+.decoration-top-right,
+.decoration-bottom-right {
+	right: 0;
+}
+
+.decoration-top-left,
+.decoration-top-right {
+	top: 0;
+}
+
+.decoration-bottom-left,
+.decoration-bottom-right {
+	bottom: 0;
+}
+
+@mixin circle($size, $background, $radius: 50%) {
+	width: $size;
+	height: $size; 
+	background: $background;
+	border-radius: $radius;
+}
+
+.circle-big {
+	@include circle(100px, rgba(0,0,0,0.8));
+}
+
+.circle-small {
+	@include circle(25px, transparent);
+	
 	border: 2px solid #000;
 	border-radius: 50%;
 	position: absolute;
 }
 
-.decoration-top-left-wrapper {
-	.small-circle {
-		border-top: transparent;
-		border-left: transparent;
-		border-radius: 0 50%;
-
+@mixin child-circle($xposition, $yposition) {
 		&:nth-child(2) {
-			left: -2px;
-			top: 48px;
+			#{$xposition}: -2px;
+			#{$yposition}: 48px;
 		}
 
 		&:nth-child(3) {
-			left: 20px;
-			top: 38px;
+			#{$xposition}: 20px;
+			#{$yposition}: 38px;
 		}
 
 		&:nth-child(4) {
-			left: 38px;
-			top: 22px;
+			#{$xposition}: 38px;
+			#{$yposition}: 22px;
 		}
 
 		&:nth-child(5) {
-			left: 46px;
-			top: 0;
+			#{$xposition}: 46px;
+			#{$yposition}: 0;
 		}
-	}
 }
 
-.decoration-top-right-wrapper {
-	.small-circle {
-		border-top: transparent;
-		border-right: transparent;
-		border-radius: 50% 0;
-
-		&:nth-child(2) {
-			right: -2px;
-			top: 48px;
-		}
-
-		&:nth-child(3) {
-			right: 20px;
-			top: 38px;
-		}
-
-		&:nth-child(4) {
-			right: 38px;
-			top: 22px;
-		}
-
-		&:nth-child(5) {
-			right: 46px;
-			top: 0;
-		}
-	}
-}
-
-.decoration-bottom-left-wrapper {
-	.small-circle {
-		border-bottom: transparent;
-		border-left: transparent;
-		border-radius: 50% 0;
-
-		&:nth-child(2) {
-			left: -2px;
-			bottom: 48px;
-		}
-
-		&:nth-child(3) {
-			left: 20px;
-			bottom: 38px;
-		}
-
-		&:nth-child(4) {
-			left: 38px;
-			bottom: 22px;
-		}
-
-		&:nth-child(5) {
-			left: 46px;
-			bottom: 0;
-		}
-	}
-}
-
-.decoration-bottom-right-wrapper {
-	.small-circle {
-		border-bottom: transparent;
-		border-right: transparent;
-		border-radius: 0 50%;
-
-		&:nth-child(2) {
-			right: -2px;
-			bottom: 48px;
-		}
-
-		&:nth-child(3) {
-			right: 20px;
-			bottom: 38px;
-		}
-
-		&:nth-child(4) {
-			right: 38px;
-			bottom: 22px;
-		}
-
-		&:nth-child(5) {
-			right: 46px;
-			bottom: 0;
-		}
-	}
+@mixin circle-small($whichBorder1, $whichBorder2, $borderColor, $radius: 0 50%) {
+	border-#{$whichBorder1}: $borderColor;
+	border-#{$whichBorder2}: $borderColor;
+	border-radius: $radius;
 }
 
 .decoration-top-left {
-	transform: translate(-50%, -50%);
+	.circle-big {
+		transform: translate(-50%, -50%);
+	}
+
+	.circle-small {
+		@include circle-small(top, left, transparent);
+		@include child-circle(left, top);
+	}
 }
 
 .decoration-top-right {
-	transform: translate(50%, -50%);
+	.circle-big {
+		transform: translate(50%, -50%);
+	}
+
+	.circle-small {
+		@include circle-small(top, right, transparent, 50% 0);
+		@include child-circle(right, top);
+	}
 }
 
-
 .decoration-bottom-left {
-	transform: translate(-50%, 50%);
+	.circle-big {
+		transform: translate(-50%, 50%);
+	}
+
+	.circle-small {
+		@include circle-small(bottom, left, transparent, 50% 0);
+		@include child-circle(left, bottom);
+	}
 }
 
 .decoration-bottom-right {
-	transform: translate(50%, 50%);
+	.circle-big {
+		transform: translate(50%, 50%);
+	}
+
+	.circle-small {
+		@include circle-small(bottom, right, transparent);
+		@include child-circle(right, bottom);
+	}
 }
