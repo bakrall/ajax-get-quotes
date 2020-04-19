@@ -54,24 +54,27 @@ main {
 	}
 }
 
-@mixin decoration($property, $value: 0) {
-	#{$property}: $value;
+/* use placeholder selector for decoration*/
+%decoration {
 	position: absolute;
 }
 
 .decoration-top-right,
 .decoration-bottom-right {
-	@include decoration(right);
+	@extend %decoration;
+	right: 0;
 }
 
 .decoration-top-left,
 .decoration-top-right {
-	@include decoration(top);
+	@extend %decoration;
+	top: 0;
 }
 
 .decoration-bottom-left,
 .decoration-bottom-right {
-	@include decoration(bottom);
+	@extend %decoration;
+	bottom: 0;
 }
 
 @mixin circle($size, $background, $radius: 50%) {
