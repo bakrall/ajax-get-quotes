@@ -38,9 +38,9 @@ main {
 
 		.get-quote-button {
 			align-self: flex-end;
-			margin: 20px 20% 0;
-			height: 40px;
-			border: 2px solid #000;
+			margin: 1rem 20% 0;
+			height: 2rem;
+			border: 0.1rem solid #000;
 			border-radius: 45%;
 			font-family: 'Courgette', cursive;
 			font-size: 0.7rem;
@@ -111,13 +111,13 @@ main {
 }
 
 .circle-big {
-	@include circle(100px, rgba(0,0,0,0.8));
+	@include circle(5rem, rgba(0,0,0,0.8));
 }
 
 .circle-small {
-	@include circle(25px, transparent);
+	@include circle(1.25rem, transparent);
 
-	border: 2px solid #000;
+	border: 0.1rem solid #000;
 	border-radius: 50%;
 	position: absolute;
 }
