@@ -111,11 +111,11 @@ main {
 }
 
 .circle-big {
-	@include circle(5rem, rgba(0,0,0,0.8));
+	@include circle(6.25rem, rgba(0,0,0,0.8));
 }
 
 .circle-small {
-	@include circle(1.25rem, transparent);
+	@include circle(1.55rem, transparent);
 
 	border: 0.1rem solid #000;
 	border-radius: 50%;
@@ -124,22 +124,22 @@ main {
 
 @mixin child-circle($xposition, $yposition) {
 		&:nth-child(2) {
-			#{$xposition}: -0.1rem;
-			#{$yposition}: 2.4rem;
+			#{$xposition}: -0.125rem;
+			#{$yposition}: 3rem;
 		}
 
 		&:nth-child(3) {
-			#{$xposition}: 1rem;
-			#{$yposition}: 1.9rem;
+			#{$xposition}: 1.25rem;
+			#{$yposition}: 2.375rem;
 		}
 
 		&:nth-child(4) {
-			#{$xposition}: 1.9rem;
-			#{$yposition}: 1.1rem;
+			#{$xposition}: 2.375rem;
+			#{$yposition}: 1.375rem;
 		}
 
 		&:nth-child(5) {
-			#{$xposition}: 2.3rem;
+			#{$xposition}: 2.875rem;
 			#{$yposition}: 0;
 		}
 }
