@@ -124,22 +124,22 @@ main {
 
 @mixin child-circle($xposition, $yposition) {
 		&:nth-child(2) {
-			#{$xposition}: -2px;
-			#{$yposition}: 48px;
+			#{$xposition}: -0.1rem;
+			#{$yposition}: 2.4rem;
 		}
 
 		&:nth-child(3) {
-			#{$xposition}: 20px;
-			#{$yposition}: 38px;
+			#{$xposition}: 1rem;
+			#{$yposition}: 1.9rem;
 		}
 
 		&:nth-child(4) {
-			#{$xposition}: 38px;
-			#{$yposition}: 22px;
+			#{$xposition}: 1.9rem;
+			#{$yposition}: 1.1rem;
 		}
 
 		&:nth-child(5) {
-			#{$xposition}: 46px;
+			#{$xposition}: 2.3rem;
 			#{$yposition}: 0;
 		}
 }
