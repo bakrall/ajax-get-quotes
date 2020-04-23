@@ -1,10 +1,15 @@
+html {
+	font-size: 20px;
+
+	@media (max-width: 768px) {
+		font-size: 16px;
+	}
+}
+
 body {
 	margin: 0;
 	font-family: 'Courgette', cursive;
-}
-
-html {
-	font-size: 20px;
+	position: relative;
 }
 
 .visuallyhidden { 
@@ -14,6 +19,18 @@ html {
     overflow: hidden;
     clip: rect(1px, 1px, 1px, 1px);
     white-space: nowrap;
+}
+
+@mixin mobile-containers {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+@mixin mobile-text {
+	background: rgba(0,0,0,0.5);
+	color: #fff;
+
 }
 
 main {
@@ -30,10 +47,23 @@ main {
 		position: relative;
 		overflow: hidden;
 
+		@media (max-width: 576px) {
+			@include mobile-containers;
+
+			background: transparent;
+			z-index: 1;
+		}
+
 		.quote-container {
 			width: 80%;
 			margin: 0 auto;
 			font-size: 1.5rem;
+
+			@media (max-width: 576px) {
+				@include mobile-text;
+
+				padding: 0 1rem;
+			}
 		}
 
 		.get-quote-button {
@@ -44,6 +74,17 @@ main {
 			border-radius: 45%;
 			font-family: 'Courgette', cursive;
 			font-size: 0.7rem;
+
+			@media (max-width: 576px) {
+				@include mobile-text;
+
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				margin-left: 0;
+				border-radius: 0;
+				font-family: sans-serif;
+			}
 
 			&:hover {
 				cursor: pointer;
@@ -56,6 +97,10 @@ main {
 		background-size: cover;
 		background-position: bottom left 30%;
 		width: 50%;
+
+		@media (max-width: 576px) {
+			@include mobile-containers;
+		}
 	}
 }
 
@@ -83,6 +128,10 @@ main {
 /* use placeholder selector for decoration*/
 %decoration {
 	position: absolute;
+
+	@media (max-width: 576px) {
+		display: none;
+	}
 }
 
 .decoration-top-right,
