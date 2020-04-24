@@ -1,6 +1,8 @@
 html {
 	font-size: 20px;
 	height: 100%;
+	display: flex;
+	flex-direction: column;
 
 	@media (max-width: 768px) {
 		font-size: 16px;
@@ -11,7 +13,12 @@ body {
 	margin: 0;
 	font-family: 'Courgette', cursive;
 	position: relative;
-	height: 100%;
+
+	// make element stretch to the full height of parent - in case of short text, for long text it is not needed
+	flex-grow: 1; 
+	display: flex;
+	flex-direction: column;
+
 }
 
 .visuallyhidden { 
@@ -37,8 +44,14 @@ body {
 
 main {
 	display: flex;
-	height: 100%;
+	flex-grow: 1; // makes element stretch to the full height of parent*/
 	margin: 0;
+
+	@media (max-width: 767px) {
+		// if <main> does not have the full height of parent, then the flex properties for .text-container 
+		// will not center the text
+		flex-grow: 0; 
+	}
 
 	.text-container {
 		background: #df0017;
@@ -46,19 +59,16 @@ main {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		position: relative;
-		overflow: hidden;
 
 		@media (max-width: 767px) {
-			@include mobile-containers;
-
+			width: 100%;
 			background: transparent;
 			z-index: 1;
 		}
 
 		.quote-container {
 			width: 80%;
-			margin: 0 auto;
+			margin: 1rem auto 2.5rem;
 			font-size: 1.5rem;
 
 			@media (max-width: 767px) {
@@ -80,7 +90,7 @@ main {
 			@media (max-width: 767px) {
 				@include mobile-text;
 
-				position: fixed;
+				position: absolute;
 				left: 0;
 				bottom: 0;
 				margin-left: 0;
@@ -116,7 +126,7 @@ main {
 	line-height: 1.2;
 	display: inline-block;
 	border-radius: 3px;
-	position: fixed;
+	position: absolute;
 	bottom: 0;
 	right: 0;
 
@@ -127,7 +137,7 @@ main {
 	}
 }
 
-/* use placeholder selector for decoration*/
+// use placeholder selector for decoration
 %decoration {
 	position: absolute;
 
