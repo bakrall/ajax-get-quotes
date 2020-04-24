@@ -75,6 +75,6 @@
 		}
 	}
  
-	displayStoredQuote();
+	// displayStoredQuote();
 	$getQuoteButton.on('click', displayQuote);
 })();
