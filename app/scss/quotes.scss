@@ -47,7 +47,7 @@ main {
 		position: relative;
 		overflow: hidden;
 
-		@media (max-width: 576px) {
+		@media (max-width: 767px) {
 			@include mobile-containers;
 
 			background: transparent;
@@ -59,7 +59,7 @@ main {
 			margin: 0 auto;
 			font-size: 1.5rem;
 
-			@media (max-width: 576px) {
+			@media (max-width: 767px) {
 				@include mobile-text;
 
 				padding: 0 1rem;
@@ -75,7 +75,7 @@ main {
 			font-family: 'Courgette', cursive;
 			font-size: 0.7rem;
 
-			@media (max-width: 576px) {
+			@media (max-width: 767px) {
 				@include mobile-text;
 
 				position: fixed;
@@ -98,7 +98,7 @@ main {
 		background-position: bottom left 30%;
 		width: 50%;
 
-		@media (max-width: 576px) {
+		@media (max-width: 767px) {
 			@include mobile-containers;
 		}
 	}
@@ -129,7 +129,7 @@ main {
 %decoration {
 	position: absolute;
 
-	@media (max-width: 576px) {
+	@media (max-width: 767px) {
 		display: none;
 	}
 }
