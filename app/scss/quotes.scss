@@ -47,7 +47,6 @@ body {
 
 %button {
 	height: 2rem;
-	border: 0.1rem solid #000;
 	box-sizing: border-box;
 	font-size: 0.7rem;
 }
@@ -99,6 +98,7 @@ main {
 			align-self: flex-end;
 			margin: 1rem 20% 0;
 			border-radius: 45%;
+			border: 0.1rem solid #000;
 			font-family: 'Courgette', cursive;
 			font-size: 0.7rem;
 
@@ -152,6 +152,7 @@ main {
 		@include button-mobile;
 
 		line-height: 1.5;
+		border: 0.1rem solid #000;
 	}
 
 	&__logo,
