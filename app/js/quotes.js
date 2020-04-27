@@ -19,7 +19,7 @@
 			">" : "&gt;",
 			"\\" : "&#x5c;",
 			"`" : "&#x60;",
-			":" : "&#58;"
+			":" : "&#58;" //it may appear in quote also
 		};
 
 		function encodeHTMLmapper(ch) {
