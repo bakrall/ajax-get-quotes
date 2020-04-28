@@ -11,22 +11,22 @@
 	let quoteText, quoteAuthor;
 
 	function htmlEncode(s) {
-		var HTMLCharMap = {
+		const HTMLCharMap = {
 			"&" : "&amp;",
-			"'" : "&#39;", //it may appear in quote, for example "you'll", "you're"
+			"'" : "&#39;",
 			'"' : "&quot;",
 			"<" : "&lt;",
 			">" : "&gt;",
 			"\\" : "&#x5c;",
 			"`" : "&#x60;",
-			":" : "&#58;" //it may appear in quote also
+			":" : "&#58;"
 		};
 
 		function encodeHTMLmapper(ch) {
-		return HTMLCharMap[ch];
+			return HTMLCharMap[ch];
 		}
 
-		return s.replace(/[&'''<>\\`:]/g, encodeHTMLmapper);
+		return s.replace(/[&"'<>\\`:]/g, encodeHTMLmapper);
 	}
 
 	function getQuote() {
@@ -53,8 +53,8 @@
 	}
 
 	function populateText(text = '', author = '') {
-		$quote.text(text);
-		$quoteAuthor.text(author);
+		$quote.html(text);
+		$quoteAuthor.html(author);
 	}
 
 	function storeQuote() {
