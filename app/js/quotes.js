@@ -6,7 +6,8 @@
 	const url = 'https://quote-garden.herokuapp.com/api/v2/quotes/random',
 		$quote = $('.quote'),
 		$quoteAuthor = $('.quote-author'),
-		$getQuoteButton = $('.get-quote-button');
+		$getQuoteButton = $('.get-quote-button'),
+		$imageContainer = $('.image-container');
 
 	let quoteText, quoteAuthor;
 
@@ -74,7 +75,12 @@
 			displayQuote();
 		}
 	}
+
+	function changeImage() {
+		$('body').hasClass('red') ? $('body').removeClass('red').addClass('green') : $('body').removeClass('green').addClass('red');
+	}
  
+ 	setInterval(changeImage, 10000);
 	displayStoredQuote();
 	$getQuoteButton.on('click', displayQuote);
 })();
