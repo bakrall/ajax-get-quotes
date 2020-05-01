@@ -7,7 +7,13 @@
 		$quote = $('.quote'),
 		$quoteAuthor = $('.quote-author'),
 		$getQuoteButton = $('.get-quote-button'),
-		$imageContainer = $('.image-container');
+		$imageContainer = $('.image-container'),
+		$creditsLink = $('.credits-link'),
+		$photographer = $('.photographer'),
+		photographers = {
+			'red': 'Annie Spratt',
+			'green': 'Nate Johnston'
+		};
 
 	let quoteText, quoteAuthor;
 
@@ -78,6 +84,15 @@
 
 	function changeImage() {
 		$('body').hasClass('red') ? $('body').removeClass('red').addClass('green') : $('body').removeClass('green').addClass('red');
+
+		setTimeout(()=> updatePhotographer(), 2000);
+	}
+
+	function updatePhotographer() {
+		const photoCategory = $('body').attr('class'),
+			photographer = photographers[photoCategory];
+
+		$photographer.text(photographer);
 	}
  
  	setInterval(changeImage, 10000);
