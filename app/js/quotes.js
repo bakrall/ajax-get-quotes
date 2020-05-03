@@ -6,6 +6,7 @@
 	const url = 'https://quote-garden.herokuapp.com/api/v2/quotes/random',
 		$quote = $('.quote'),
 		$quoteAuthor = $('.quote-author'),
+		$quoteContainer = $('.quote-container'),
 		$getQuoteButton = $('.get-quote-button'),
 		$imageContainer = $('.image-container'),
 		$creditsLink = $('.credits-link'),
@@ -54,14 +55,26 @@
 		const request = getQuote();
 
 		request.done(() => {
-			populateText(quoteText, quoteAuthor);
+			populateText(quoteText, quoteAuthor, 1500);
+			changeImage();
 			storeQuote();
 		})
 	}
 
-	function populateText(text = '', author = '') {
-		$quote.html(text);
-		$quoteAuthor.html(author);
+	function populateText(text = '', author = '', timing) {
+		//fadeOut whole quote container
+		// $quoteContainer.fadeOut(timing, () => {
+		// 		$quote.html(text);
+		// 		$quoteAuthor.html(author);
+		// }).fadeIn(timing);
+
+		//fade out only text
+		$.each([$quote, $quoteAuthor], (i, el) => {
+			$(el).fadeOut(timing, () => {
+				$quote.html(text);
+				$quoteAuthor.html(author);
+			}).fadeIn(timing);
+		});
 	}
 
 	function storeQuote() {
@@ -76,7 +89,7 @@
 			notNull = quoteStored !== null && quoteAuthorStored !== null;
 
 		if (notUndefined && notNull) {
-			populateText(quoteStored, quoteAuthorStored);
+			populateText(quoteStored, quoteAuthorStored, 0);
 		} else {
 			displayQuote();
 		}
@@ -98,7 +111,6 @@
 		})
 	}
  
- 	setInterval(changeImage, 10000);
 	displayStoredQuote();
 	$getQuoteButton.on('click', displayQuote);
 })();

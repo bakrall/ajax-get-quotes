@@ -78,12 +78,14 @@ main {
 		overflow: hidden;
 		transition: background 4s ease-in-out;
 
-		.red & {
-			background: $red;
-		}
+		@media (min-width: 768px) {
+			.red & {
+				background: $red;
+			}
 
-		.green & {
-			background: $green;
+			.green & {
+				background: $green;
+			}
 		}
 
 		@media (max-width: 767px) {
