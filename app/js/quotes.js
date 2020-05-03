@@ -85,14 +85,17 @@
 	function changeImage() {
 		$('body').hasClass('red') ? $('body').removeClass('red').addClass('green') : $('body').removeClass('green').addClass('red');
 
-		setTimeout(()=> updatePhotographer(), 2000);
+		updatePhotographer();
 	}
 
 	function updatePhotographer() {
 		const photoCategory = $('body').attr('class'),
 			photographer = photographers[photoCategory];
 
-		$photographer.text(photographer);
+		$creditsLink.fadeOut(2000, () => {
+			$photographer.text(photographer);
+			$creditsLink.fadeIn(2000);
+		})
 	}
  
  	setInterval(changeImage, 10000);
