@@ -54,14 +54,18 @@
 	function displayQuote() {
 		const request = getQuote();
 
-		request.done(() => {
-			populateText(quoteText, quoteAuthor, 1500);
-			changeImage();
-			storeQuote();
-		})
+		request
+			.done(() => {
+				populateText(quoteText, quoteAuthor, 1500);
+				changeImage();
+				storeQuote();
+			})
+			.fail( error => {
+				console.log(error.statusText);
+			});
 	}
 
-	function populateText(text = '', author = '', timing) {
+	function populateText(text = '', author = '', timing = 0) {
 		//fadeOut whole quote container
 		// $quoteContainer.fadeOut(timing, () => {
 		// 		$quote.html(text);
@@ -89,7 +93,7 @@
 			notNull = quoteStored !== null && quoteAuthorStored !== null;
 
 		if (notUndefined && notNull) {
-			populateText(quoteStored, quoteAuthorStored, 0);
+			populateText(quoteStored, quoteAuthorStored);
 		} else {
 			displayQuote();
 		}
