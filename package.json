@@ -4,8 +4,10 @@
   "description": "Get quotes from RESTful API \u0016\u0016//https://pprathameshmore.github.io/QuoteGarden/",
   "main": "gulpfile.js",
   "dependencies": {
+    "express": "^4.17.1",
     "gulp": "^4.0.2",
-    "gulp-connect": "^5.7.0"
+    "gulp-connect": "^5.7.0",
+    "nedb": "^1.8.0"
   },
   "devDependencies": {
     "autoprefixer": "^9.7.6",

@@ -3,7 +3,7 @@
 (function() {
 	'use strict';
 
-	const url = 'https://quote-garden.herokuapp.com/api/v2/quotes/random',
+	const url = 'https://gist.github.com/bakrall/8c4987127e2f093c93415e29b2a01564',
 		$quote = $('.quote'),
 		$quoteAuthor = $('.quote-author'),
 		$quoteContainer = $('.quote-container'),
@@ -41,12 +41,15 @@
 		return $.ajax({
 					type: 'GET',
 					url: url,
+					dataType: 'jsonp',
 					success: function(response) {
-						quoteText = htmlEncode(response.quote.quoteText),
-						quoteAuthor = htmlEncode(response.quote.quoteAuthor);
+						const id = Math.floor(Math.random() * 3);
+
+						quoteText = htmlEncode(response[id].text),
+						quoteAuthor = htmlEncode(response[id].author);
 					},
 					error: function(error) {
-						console.log(error);
+						console.log(error.statusText);
 					}
 				});
 	}
