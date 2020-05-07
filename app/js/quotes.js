@@ -41,7 +41,6 @@
 		return $.ajax({
 					type: 'GET',
 					url: url,
-					dataType: 'jsonp',
 					success: function(response) {
 						const id = Math.floor(Math.random() * 3);
 
