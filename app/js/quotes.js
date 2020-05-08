@@ -14,58 +14,77 @@
 		photographers = {
 			'red': 'Annie Spratt',
 			'green': 'Nate Johnston'
-		};
+		},
+		quotes = $('.auxiliary').data('json');
+	let	quotesCount = 0;
 
 	let quoteText, quoteAuthor;
 
-	function htmlEncode(s) {
-		const HTMLCharMap = {
-			"&" : "&amp;",
-			"'" : "&#39;",
-			'"' : "&quot;",
-			"<" : "&lt;",
-			">" : "&gt;",
-			"\\" : "&#x5c;",
-			"`" : "&#x60;",
-			":" : "&#58;"
-		};
+	function getQuoteFromAuxiliaryDiv() {
+		const quotesNum = quotes.length;
+		
+		quoteText = quotes[quotesCount].text,
+		quoteAuthor = quotes[quotesCount].author;
 
-		function encodeHTMLmapper(ch) {
-			return HTMLCharMap[ch];
+		populateText(quoteText, quoteAuthor, 1500);
+		changeImage();
+		storeQuote();
+
+		quotesCount++;
+
+		if (quotesCount === quotesNum) {
+			quotesCount = 0;
 		}
-
-		return s.replace(/[&"'<>\\`:]/g, encodeHTMLmapper);
 	}
 
-	function getQuote() {
-		return $.ajax({
-					type: 'GET',
-					url: url,
-					success: function(response) {
-						const id = Math.floor(Math.random() * 3);
+	// function htmlEncode(s) {
+	// 	const HTMLCharMap = {
+	// 		"&" : "&amp;",
+	// 		"'" : "&#39;",
+	// 		'"' : "&quot;",
+	// 		"<" : "&lt;",
+	// 		">" : "&gt;",
+	// 		"\\" : "&#x5c;",
+	// 		"`" : "&#x60;",
+	// 		":" : "&#58;"
+	// 	};
 
-						quoteText = htmlEncode(response[id].text),
-						quoteAuthor = htmlEncode(response[id].author);
-					},
-					error: function(error) {
-						console.log(error.statusText);
-					}
-				});
-	}
+	// 	function encodeHTMLmapper(ch) {
+	// 		return HTMLCharMap[ch];
+	// 	}
 
-	function displayQuote() {
-		const request = getQuote();
+	// 	return s.replace(/[&"'<>\\`:]/g, encodeHTMLmapper);
+	// }
 
-		request
-			.done(() => {
-				populateText(quoteText, quoteAuthor, 1500);
-				changeImage();
-				storeQuote();
-			})
-			.fail( error => {
-				console.log(error.statusText);
-			});
-	}
+	// function getQuote() {
+	// 	return $.ajax({
+	// 				type: 'GET',
+	// 				url: url,
+	// 				success: function(response) {
+	// 					const id = Math.floor(Math.random() * 3);
+
+	// 					quoteText = htmlEncode(response[id].text),
+	// 					quoteAuthor = htmlEncode(response[id].author);
+	// 				},
+	// 				error: function(error) {
+	// 					console.log(error.statusText);
+	// 				}
+	// 			});
+	// }
+
+	// function displayQuote() {
+	// 	const request = getQuote();
+
+	// 	request
+	// 		.done(() => {
+	// 			populateText(quoteText, quoteAuthor, 1500);
+	// 			changeImage();
+	// 			storeQuote();
+	// 		})
+	// 		.fail( error => {
+	// 			console.log(error.statusText);
+	// 		});
+	// }
 
 	function populateText(text = '', author = '', timing = 0) {
 		//fadeOut whole quote container
@@ -97,7 +116,8 @@
 		if (notUndefined && notNull) {
 			populateText(quoteStored, quoteAuthorStored);
 		} else {
-			displayQuote();
+			// displayQuote();
+			getQuoteFromAuxiliaryDiv();
 		}
 	}
 
@@ -118,5 +138,7 @@
 	}
  
 	displayStoredQuote();
-	$getQuoteButton.on('click', displayQuote);
+	// getQuoteFromAuxiliaryDiv();
+	// $getQuoteButton.on('click', displayQuote);
+	$getQuoteButton.on('click', getQuoteFromAuxiliaryDiv);
 })();
