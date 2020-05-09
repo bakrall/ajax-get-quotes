@@ -3,7 +3,7 @@
 (function() {
 	'use strict';
 
-	const url = 'https://gist.github.com/bakrall/8c4987127e2f093c93415e29b2a01564',
+	const url = 'https://gist.githubusercontent.com/bakrall/8c4987127e2f093c93415e29b2a01564/raw/91f7a495dbc0eb35984d8790710fc9c3524d124b/quotes.json',
 		$quote = $('.quote'),
 		$quoteAuthor = $('.quote-author'),
 		$quoteContainer = $('.quote-container'),
@@ -20,71 +20,55 @@
 
 	let quoteText, quoteAuthor;
 
-	function getQuoteFromAuxiliaryDiv() {
-		const quotesNum = quotes.length;
-		
-		quoteText = quotes[quotesCount].text,
-		quoteAuthor = quotes[quotesCount].author;
+	function htmlEncode(s) {
+		const HTMLCharMap = {
+			"&" : "&amp;",
+			"'" : "&#39;",
+			'"' : "&quot;",
+			"<" : "&lt;",
+			">" : "&gt;",
+			"\\" : "&#x5c;",
+			"`" : "&#x60;",
+			":" : "&#58;"
+		};
 
-		populateText(quoteText, quoteAuthor, 1500);
-		changeImage();
-		storeQuote();
-
-		quotesCount++;
-
-		if (quotesCount === quotesNum) {
-			quotesCount = 0;
+		function encodeHTMLmapper(ch) {
+			return HTMLCharMap[ch];
 		}
+
+		return s.replace(/[&"'<>\\`:]/g, encodeHTMLmapper);
 	}
 
-	// function htmlEncode(s) {
-	// 	const HTMLCharMap = {
-	// 		"&" : "&amp;",
-	// 		"'" : "&#39;",
-	// 		'"' : "&quot;",
-	// 		"<" : "&lt;",
-	// 		">" : "&gt;",
-	// 		"\\" : "&#x5c;",
-	// 		"`" : "&#x60;",
-	// 		":" : "&#58;"
-	// 	};
+	function getQuote() {
+		return $.ajax({
+					type: 'GET',
+					url: url,
+					success: function(response) {
+						const data = JSON.parse(response),
+							id = Math.floor(Math.random() * 3);
 
-	// 	function encodeHTMLmapper(ch) {
-	// 		return HTMLCharMap[ch];
-	// 	}
+						quoteText = htmlEncode(data[id].text),
+						quoteAuthor = htmlEncode(data[id].author);
+					},
+					error: function(error) {
+						console.log(error.statusText);
+					}
+				});
+	}
 
-	// 	return s.replace(/[&"'<>\\`:]/g, encodeHTMLmapper);
-	// }
+	function displayQuote() {
+		const request = getQuote();
 
-	// function getQuote() {
-	// 	return $.ajax({
-	// 				type: 'GET',
-	// 				url: url,
-	// 				success: function(response) {
-	// 					const id = Math.floor(Math.random() * 3);
-
-	// 					quoteText = htmlEncode(response[id].text),
-	// 					quoteAuthor = htmlEncode(response[id].author);
-	// 				},
-	// 				error: function(error) {
-	// 					console.log(error.statusText);
-	// 				}
-	// 			});
-	// }
-
-	// function displayQuote() {
-	// 	const request = getQuote();
-
-	// 	request
-	// 		.done(() => {
-	// 			populateText(quoteText, quoteAuthor, 1500);
-	// 			changeImage();
-	// 			storeQuote();
-	// 		})
-	// 		.fail( error => {
-	// 			console.log(error.statusText);
-	// 		});
-	// }
+		request
+			.done(() => {
+				populateText(quoteText, quoteAuthor, 1500);
+				changeImage();
+				storeQuote();
+			})
+			.fail( error => {
+				console.log(error.statusText);
+			});
+	}
 
 	function populateText(text = '', author = '', timing = 0) {
 		//fadeOut whole quote container
@@ -116,8 +100,7 @@
 		if (notUndefined && notNull) {
 			populateText(quoteStored, quoteAuthorStored);
 		} else {
-			// displayQuote();
-			getQuoteFromAuxiliaryDiv();
+			displayQuote();
 		}
 	}
 
@@ -138,7 +121,5 @@
 	}
  
 	displayStoredQuote();
-	// getQuoteFromAuxiliaryDiv();
-	// $getQuoteButton.on('click', displayQuote);
-	$getQuoteButton.on('click', getQuoteFromAuxiliaryDiv);
+	$getQuoteButton.on('click', displayQuote);
 })();
