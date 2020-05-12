@@ -165,7 +165,11 @@ footer {
 	right: 0;
 	text-align: center;
 	font-size: 0.5rem;
-	color: #fff;
+	color: #000;
+
+	@media (max-width: 767px) {
+		color: #fff;
+	}
 }
 
 .credits-link {

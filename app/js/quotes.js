@@ -39,6 +39,10 @@
 		return s.replace(/[&"'<>\\`:]/g, encodeHTMLmapper);
 	}
 
+	function cacheQuotes(response) {
+		localStorage.setItem('quotes', response);
+	}
+
 	function getQuote() {
 		return $.ajax({
 					type: 'GET',
@@ -46,6 +50,8 @@
 					success: function(response) {
 						const data = JSON.parse(response),
 							id = Math.floor(Math.random() * 3);
+
+						cacheQuotes(response);
 
 						quoteText = htmlEncode(data[id].text),
 						quoteAuthor = htmlEncode(data[id].author);
@@ -56,18 +62,32 @@
 				});
 	}
 
-	function displayQuote() {
-		const request = getQuote();
+	function changeQuote() {
+		populateText(quoteText, quoteAuthor, 1500);
+		changeImage();
+		storeQuote();
+	}
 
-		request
-			.done(() => {
-				populateText(quoteText, quoteAuthor, 1500);
-				changeImage();
-				storeQuote();
-			})
-			.fail( error => {
-				console.log(error.statusText);
-			});
+	function displayQuote() {
+		if (localStorage.getItem('quotes')) {
+			const cachedQuotes = JSON.parse(localStorage.getItem('quotes')),
+				id = Math.floor(Math.random() * 3);
+
+			quoteText = htmlEncode(cachedQuotes[id].text),
+			quoteAuthor = htmlEncode(cachedQuotes[id].author);
+
+			changeQuote();
+		} else {
+			const request = getQuote();
+
+			request
+				.done(() => {
+					changeQuote();
+				})
+				.fail( error => {
+					console.log(error.statusText);
+				});
+		}
 	}
 
 	function populateText(text = '', author = '', timing = 0) {
