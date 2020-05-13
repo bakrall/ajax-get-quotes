@@ -16,7 +16,8 @@
 			'green': 'Nate Johnston'
 		},
 		quotes = $('.auxiliary').data('json');
-	let	quotesCount = 0;
+	let	quotesCount = 0,
+		alreadyRunning = false;
 
 	let quoteText, quoteAuthor;
 
@@ -69,6 +70,10 @@
 	}
 
 	function displayQuote() {
+		if (alreadyRunning) return;
+
+		alreadyRunning = true;
+
 		if (localStorage.getItem('quotes')) {
 			const cachedQuotes = JSON.parse(localStorage.getItem('quotes')),
 				id = Math.floor(Math.random() * 3);
@@ -102,7 +107,9 @@
 			$(el).fadeOut(timing, () => {
 				$quote.html(text);
 				$quoteAuthor.html(author);
-			}).fadeIn(timing);
+			}).fadeIn(timing, () => {
+				alreadyRunning = false;
+			});
 		});
 	}
 
@@ -113,11 +120,9 @@
 
 	function displayStoredQuote() {
 		const quoteStored = localStorage.getItem('quoteStored'),
-			quoteAuthorStored = localStorage.getItem('quoteAuthorStored'),
-			notUndefined = quoteStored !== 'undefined' && quoteAuthorStored !== 'undefined',
-			notNull = quoteStored !== null && quoteAuthorStored !== null;
+			quoteAuthorStored = localStorage.getItem('quoteAuthorStored');
 
-		if (notUndefined && notNull) {
+		if (quoteStored && quoteAuthorStored) {
 			populateText(quoteStored, quoteAuthorStored);
 		} else {
 			displayQuote();
@@ -126,7 +131,7 @@
 
 	function changeImage() {
 		$('body').hasClass('red') ? $('body').removeClass('red').addClass('green') : $('body').removeClass('green').addClass('red');
-
+		
 		updatePhotographer();
 	}
 
