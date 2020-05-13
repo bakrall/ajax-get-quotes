@@ -170,6 +170,15 @@ footer {
 
 	@media (max-width: 767px) {
 		color: #fff;
+		font-size: 0.6rem;
+	}
+
+	@media (max-width: 575px) {
+		transform: translate(45%) rotate(90deg);
+		bottom: initial;
+		left: initial;
+		right: -3px;
+		font-size: 0.7rem;
 	}
 }
 
