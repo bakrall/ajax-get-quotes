@@ -147,4 +147,9 @@
  
 	displayStoredQuote();
 	$getQuoteButton.on('click', displayQuote);
+	$(document).on('scroll', function () {
+		$('html').css({
+			height: $(document).height()
+		})
+	})
 })();
