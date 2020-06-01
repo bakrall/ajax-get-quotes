@@ -3,7 +3,7 @@
 (function() {
 	'use strict';
 
-	const url = 'https://gist.githubusercontent.com/bakrall/8c4987127e2f093c93415e29b2a01564/raw/91f7a495dbc0eb35984d8790710fc9c3524d124b/quotes.json',
+	const url = 'https://gist.githubusercontent.com/bakrall/8c4987127e2f093c93415e29b2a01564/raw/c6f1e15becef2ce1755a89d97cef38903192e09e/quotes.json',
 		$quote = $('.quote'),
 		$quoteAuthor = $('.quote-author'),
 		$quoteContainer = $('.quote-container'),
