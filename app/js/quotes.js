@@ -40,6 +40,7 @@
 		return s.replace(/[&"'<>\\`:]/g, encodeHTMLmapper);
 	}
 
+	//cache fetched quotes to make their display quicker
 	function cacheQuotes(response) {
 		localStorage.setItem('quotes', response);
 	}
@@ -63,10 +64,11 @@
 				});
 	}
 
-	function changeQuote() {
-		populateText(quoteText, quoteAuthor, 1500);
-		changeImage();
+	function changeQuote(timing, changeImg) {
+		populateText(quoteText, quoteAuthor, timing);
 		storeQuote();
+
+		if (changeImg) changeImage();
 	}
 
 	function displayQuote() {
@@ -81,13 +83,13 @@
 			quoteText = htmlEncode(cachedQuotes[id].text),
 			quoteAuthor = htmlEncode(cachedQuotes[id].author);
 
-			changeQuote();
+			changeQuote(1500, true);
 		} else {
 			const request = getQuote();
 
 			request
 				.done(() => {
-					changeQuote();
+					changeQuote(0, false);
 				})
 				.fail( error => {
 					console.log(error.statusText);
@@ -118,17 +120,6 @@
 		localStorage.setItem('quoteAuthorStored', quoteAuthor);
 	}
 
-	function displayStoredQuote() {
-		const quoteStored = localStorage.getItem('quoteStored'),
-			quoteAuthorStored = localStorage.getItem('quoteAuthorStored');
-
-		if (quoteStored && quoteAuthorStored) {
-			populateText(quoteStored, quoteAuthorStored);
-		} else {
-			displayQuote();
-		}
-	}
-
 	function changeImage() {
 		$('body').hasClass('red') ? $('body').removeClass('red').addClass('green') : $('body').removeClass('green').addClass('red');
 		
@@ -144,8 +135,15 @@
 			$creditsLink.fadeIn(2000);
 		})
 	}
+
+	function init() {
+		//clear storage on page load in case new quotes are added
+		localStorage.clear();
+		displayQuote();
+	}
  
-	displayStoredQuote();
+	init();
+
 	$getQuoteButton.on('click', displayQuote);
 	$(window).on('scroll', function () {
 		$('html').css({
