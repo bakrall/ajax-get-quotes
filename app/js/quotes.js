@@ -76,7 +76,7 @@
 
 		if (localStorage.getItem('quotes')) {
 			const cachedQuotes = JSON.parse(localStorage.getItem('quotes')),
-				id = Math.floor(Math.random() * 3);
+				id = Math.floor(Math.random() * 6);
 
 			quoteText = htmlEncode(cachedQuotes[id].text),
 			quoteAuthor = htmlEncode(cachedQuotes[id].author);
@@ -147,9 +147,9 @@
  
 	displayStoredQuote();
 	$getQuoteButton.on('click', displayQuote);
-	$(document).on('scroll', function () {
+	$(window).on('scroll', function () {
 		$('html').css({
-			height: $(document).height()
+			height: $(window).height()
 		})
 	})
 })();
