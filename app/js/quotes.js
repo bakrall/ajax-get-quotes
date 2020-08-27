@@ -145,9 +145,4 @@
 	init();
 
 	$getQuoteButton.on('click', displayQuote);
-	$(window).on('scroll', function () {
-		$('html').css({
-			height: $(window).height()
-		})
-	})
 })();
