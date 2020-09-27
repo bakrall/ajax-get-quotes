@@ -136,6 +136,10 @@
 		})
 	}
 
+	function adjustHeight() {
+		$('html').css('height', '100%');
+	}
+
 	function init() {
 		//clear storage on page load in case new quotes are added
 		localStorage.clear();
@@ -145,4 +149,5 @@
 	init();
 
 	$getQuoteButton.on('click', displayQuote);
+	$(document).on('scroll', adjustHeight);
 })();
