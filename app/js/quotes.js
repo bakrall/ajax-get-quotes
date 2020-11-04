@@ -11,11 +11,13 @@
 		$imageContainer = $('.image-container'),
 		$creditsLink = $('.credits-link'),
 		$photographer = $('.photographer'),
+		$root = $('html'), //JS - root = document.documentElement
 		photographers = {
 			'red': 'Annie Spratt',
 			'green': 'Nate Johnston'
 		},
-		quotes = $('.auxiliary').data('json');
+		quotes = $('.auxiliary').data('json'),
+		heightOnLoad = window.innerHeight;;
 	let	quotesCount = 0,
 		alreadyRunning = false;
 
@@ -136,10 +138,15 @@
 		})
 	}
 
+	function setInitialHeight() {
+		$root.css('--height', heightOnLoad);
+	}
+
 	function init() {
 		//clear storage on page load in case new quotes are added
 		localStorage.clear();
 		displayQuote();
+		setInitialHeight();
 	}
  
 	init();
