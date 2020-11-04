@@ -7,8 +7,11 @@ $backgrounds: (
 
 html {
 	font-size: 20px;
-	height: 100%;
-	display: flex;
+	height: calc(100vh - calc(100vh - 100%));
+	display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  	display: -ms-flexbox;  /* TWEENER - IE 10 */
+  	display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  	display: flex;
 	flex-direction: column;
 
 	@media (max-width: 767px) {
@@ -23,7 +26,10 @@ body {
 
 	// make element stretch to the full height of parent - in case of short text, for long text it is not needed
 	flex-grow: 1; 
-	display: flex;
+	display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  	display: -ms-flexbox;  /* TWEENER - IE 10 */
+  	display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  	display: flex;
 	flex-direction: column;
 
 }
