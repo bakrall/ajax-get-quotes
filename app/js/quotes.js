@@ -144,6 +144,7 @@
 		displayQuote();
 	}
 
+	$getQuoteButton.on('click', displayQuote);
 	$(window).resize(adjustHeight);
  
 	init();
