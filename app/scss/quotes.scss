@@ -5,9 +5,13 @@ $backgrounds: (
 	'green': url("../app/images/nate-johnston-unsplash.jpg")
 );
 
+:root {
+	--height: 100%;
+}
+
 html {
 	font-size: 20px;
-	height: calc(100vh - calc(100vh - 100%));
+	height: var(--height);
 	display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
   	display: -ms-flexbox;  /* TWEENER - IE 10 */
   	display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */

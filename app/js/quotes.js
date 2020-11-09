@@ -16,8 +16,7 @@
 			'red': 'Annie Spratt',
 			'green': 'Nate Johnston'
 		},
-		quotes = $('.auxiliary').data('json'),
-		heightOnLoad = window.innerHeight;;
+		quotes = $('.auxiliary').data('json');
 	let	quotesCount = 0,
 		alreadyRunning = false;
 
@@ -100,12 +99,6 @@
 	}
 
 	function populateText(text = '', author = '', timing = 0) {
-		//fadeOut whole quote container
-		// $quoteContainer.fadeOut(timing, () => {
-		// 		$quote.html(text);
-		// 		$quoteAuthor.html(author);
-		// }).fadeIn(timing);
-
 		//fade out only text
 		$.each([$quote, $quoteAuthor], (i, el) => {
 			$(el).fadeOut(timing, () => {
@@ -138,16 +131,20 @@
 		})
 	}
 
-	function setInitialHeight() {
-		$root.css('--height', heightOnLoad);
+	function adjustHeight() {
+		//obtain the height of the window minus its horizontal scroll bar and any borders
+		const actualClientHeight = $root.get(0).clientHeight + 'px';
+
+		$root.css('--height', actualClientHeight);
 	}
 
 	function init() {
 		//clear storage on page load in case new quotes are added
 		localStorage.clear();
 		displayQuote();
-		setInitialHeight();
 	}
+
+	$(window).resize(adjustHeight);
  
 	init();
 })();
