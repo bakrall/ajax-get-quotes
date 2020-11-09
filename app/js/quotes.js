@@ -65,13 +65,6 @@
 				});
 	}
 
-	function changeQuote(timing, changeImg) {
-		populateText(quoteText, quoteAuthor, timing);
-		storeQuote();
-
-		if (changeImg) changeImage();
-	}
-
 	function displayQuote() {
 		if (alreadyRunning) return;
 
@@ -98,6 +91,13 @@
 		}
 	}
 
+	function changeQuote(timing, changeImg) {
+		populateText(quoteText, quoteAuthor, timing);
+		storeQuote();
+
+		if (changeImg) changeImage();
+	}
+
 	function populateText(text = '', author = '', timing = 0) {
 		//fade out only text
 		$.each([$quote, $quoteAuthor], (i, el) => {
@@ -116,7 +116,9 @@
 	}
 
 	function changeImage() {
-		$('body').hasClass('red') ? $('body').removeClass('red').addClass('green') : $('body').removeClass('green').addClass('red');
+		setTimeout(() => {
+			$('body').hasClass('red') ? $('body').removeClass('red').addClass('green') : $('body').removeClass('green').addClass('red');
+		}, 300);
 		
 		updatePhotographer();
 	}
@@ -125,9 +127,9 @@
 		const photoCategory = $('body').attr('class'),
 			photographer = photographers[photoCategory];
 
-		$creditsLink.fadeOut(2000, () => {
+		$creditsLink.fadeOut(1500, () => {
 			$photographer.text(photographer);
-			$creditsLink.fadeIn(2000);
+			$creditsLink.fadeIn(1500);
 		})
 	}
 
