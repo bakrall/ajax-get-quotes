@@ -138,6 +138,7 @@
 		const actualClientHeight = $root.get(0).clientHeight + 'px';
 
 		$root.css('--height', actualClientHeight);
+		console.log('adjustHeight')
 	}
 
 	function init() {
@@ -147,7 +148,7 @@
 	}
 
 	$getQuoteButton.on('click', displayQuote);
-	$(window).resize(adjustHeight);
+	$(window).on('scroll', adjustHeight);
  
 	init();
 })();
